@@ -11,7 +11,7 @@ def print_loc(gamestate):
               , gamestate["location"][0].title() + ".")
 
 def get_command(gamestate):
-    command = input("What are going to do captin? ")
+    command = input("What are going to do captain? ")
     command = input_clean(command)
 
     if command == "warp":

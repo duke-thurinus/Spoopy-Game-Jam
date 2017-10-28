@@ -13,6 +13,9 @@ def warpdrive(gamestate):
         loc = str(input("\nWhich system do you want to warp to? "))
         loc = input_clean(loc)
         
+        if loc == "quit":
+            return gamestate
+        
         if loc in warp_options:
             gamestate["location"] = [ loc, "" ]
             return gamestate
@@ -24,12 +27,19 @@ def impulse(gamestate):
     impulse_options = get_impulse_options(gamestate)
     while True:
         print("\nThe planets in the system are:")
-        for i in impulse_options:
-            print(i.title())
+        if not impulse_options[0]:
+            print("There are no planets in the system")
+            return gamestate
+        else:
+            for i in impulse_options:
+                print(i.title())
 
         loc = str(input("\nWhich planet do you want to fly to? "))
         loc = input_clean(loc)
-
+        
+        if loc == "quit":
+            return gamestate
+        
         if loc in impulse_options:
             gamestate["location"] = [ gamestate["location"][0], loc]
             return gamestate
