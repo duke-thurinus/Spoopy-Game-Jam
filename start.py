@@ -29,5 +29,7 @@ def initilize():
         }
     gamestate = { "galaxy" : galaxy , "systems" : systems
                   , "location" : [ "sol", "" ]
+                  , "my_ship" :{"shields" : 100, "structure" : 100, "engines" : 100
+                             , "weapons" : 100, "sensors" : 100 }
         }
     return gamestate
