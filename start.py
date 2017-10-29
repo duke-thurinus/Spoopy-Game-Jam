@@ -27,9 +27,19 @@ def initilize():
                 , "carina" : [ "carina 1" ]
                 , "ross" : [ "ross 1", "ross 2", "ross 3", "ross 4" ]
         }
-    gamestate = { "galaxy" : galaxy , "systems" : systems
+    #ship types
+    ships = { "my ship" : {"shields" : 100, "structure" : 100
+                         , "engines" : 100, "weapons" : 40
+                         , "sensors" : 100}
+              
+              , "fighter" : {"shields" : 20, "structure" : 100
+                           , "engines" : 120, "weapons" : 10
+                           , "sensors" : 100}
+              , "corvette" : {"shields" : 20, "structure" : 100
+                            , "engines" : 120, "weapons" : 10
+                            , "sensors" : 100}
+              }
+    gamestate = { "galaxy" : galaxy , "systems" : systems, "ships" : ships
                   , "location" : [ "sol", "" ]
-                  , "my_ship" :{"shields" : 100, "structure" : 100, "engines" : 100
-                             , "weapons" : 100, "sensors" : 100 }
-        }
+            }
     return gamestate

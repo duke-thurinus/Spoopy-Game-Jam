@@ -1,27 +1,79 @@
+import skill_check, user
 from commands import warpdrive
+from random import randint
+from start import initilize
 
-def is_dead(gamestate):
-    if gamestate["my_ship"]["structure"] < 1:
+def is_dead(ship):
+    if ship["structure"] < 1:
         return True
     else:
         return False
 
-def enemy_turn():
-    pass
+def enemy_turn(ship, enemy):
+    targets = ["structure", "engines", "weapons", "sensors"]
+    target = targets[randint(0,3)]
+    return fire(ship, enemy, target)
 
-def enemy_fire():
-    pass
+def take_damage(ship, damage, target):
+    shields = ship["shields"]
+    if shields > 0:
+        shields -= damage
+        if shields < 0:
+            damage = shields * -1
+            shields = 0
+    ship["shields"] = shields
 
-def your_turn(gamestate):
+    structure = ship["structure"]
+    system = ship[target]
+    if damage > 0:
+        structure -= damage // 2
+        system -= damage // 2
+    ship["structure"] = structure
+    ship[target] = system
+    
+    return ship
+
+def fire(firing_ship, defending_ship, target):
+    damage = randint(0, firing_ship["weapons"])
+    defending_ship = take_damage(defending_ship, damage, target)
+    return defending_ship
+
+def your_turn(gamestate, ship, enemy):
     command = input("What are going to do captain? ")
-    enemy = 
-    if "warp":
-        enemy_fire()
-        gamestate = warpdrive(gamestate)
+    if command == "fire":
+        target = user.get_from_list(["engines", "weapons", "sensors"])
+        enemy = fire(ship, enemy, target)
+        return gamestate, ship, enemy, not is_dead(enemy)
+    elif command == "warp":
+        if skill_check.engine(ship, randint(0, enemy["engines"])):
+            gamestate = warpdrive(gamestate)
+            return gamestate, ship, enemy, False
+        else:
+            print("You failed to escape!")
+            return gamestate, ship, enemy, True
 
-def combat(gamestate):
-    while True:
-        combat_over, gamestate = your_turn(gamestate)
-        if combat_over():
-            return gamestate
-        enemy_turn()
+def do_turn(gamestate, ship, enemy, turn):
+    if turn == 1:
+        gamestate, ship, enemy, fighting = your_turn(gamestate, ship, enemy)
+        return gamestate, ship, enemy, fighting , turn
+    else:
+        ship = enemy_turn(ship, enemy)
+        return gamestate, ship, enemy, not is_dead(ship), turn
+
+#tracks turns
+def combat(gamestate, enemy):
+    enemy = gamestate["ships"][enemy]
+    ship = gamestate["ships"]["my ship"]
+    fighting = True
+    turn = 1
+    print(enemy)
+    while fighting:
+        gamestate, ship, enemy, fighting, turn = do_turn(gamestate, ship, enemy, turn)
+        turn = turn % 2 + 1 #switch player
+        print(ship)
+        print(enemy)
+    gamestate["ships"]["my ship"] = ship
+
+gamestate = initilize()
+combat(gamestate,"fighter")
+print("\nover")

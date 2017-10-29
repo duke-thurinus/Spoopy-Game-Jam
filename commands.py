@@ -1,4 +1,4 @@
-from text import input_clean
+import user
 
 def get_warp_options(gamestate):
     return gamestate["galaxy"][gamestate["location"][0]]
@@ -10,8 +10,7 @@ def warpdrive(gamestate):
         for i in warp_options:
             print(i.title())
         
-        loc = str(input("\nWhich system do you want to warp to? "))
-        loc = input_clean(loc)
+        loc = user.clean_input("\nWhich system do you want to warp to? ")
         
         if loc == "quit":
             return gamestate
@@ -34,8 +33,7 @@ def impulse(gamestate):
             for i in impulse_options:
                 print(i.title())
 
-        loc = str(input("\nWhich planet do you want to fly to? "))
-        loc = input_clean(loc)
+        loc = user.clean_input("\nWhich planet do you want to fly to? ")
         
         if loc == "quit":
             return gamestate
