@@ -32,11 +32,11 @@ def initilize():
                          , "engines" : 100, "weapons" : 40
                          , "sensors" : 100}
               
-              , "fighter" : {"shields" : 20, "structure" : 100
-                           , "engines" : 120, "weapons" : 10
+              , "fighter" : {"shields" : 20, "structure" : 50
+                           , "engines" : 120, "weapons" : 15
                            , "sensors" : 100}
-              , "corvette" : {"shields" : 20, "structure" : 100
-                            , "engines" : 120, "weapons" : 10
+              , "corvette" : {"shields" : 50, "structure" : 75
+                            , "engines" : 120, "weapons" : 20
                             , "sensors" : 100}
               }
     gamestate = { "galaxy" : galaxy , "systems" : systems, "ships" : ships

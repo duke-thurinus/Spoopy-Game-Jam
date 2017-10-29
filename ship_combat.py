@@ -10,9 +10,9 @@ def is_dead(ship):
         return False
 
 def enemy_turn(ship, enemy):
-    targets = ["structure", "engines", "weapons", "sensors"]
-    target = targets[randint(0,3)]
-    return fire(ship, enemy, target)
+    targets = ["engines", "weapons", "sensors"]
+    target = targets[randint(0,2)]
+    return fire(enemy, ship, target)
 
 def take_damage(ship, damage, target):
     shields = ship["shields"]
@@ -28,6 +28,8 @@ def take_damage(ship, damage, target):
     if damage > 0:
         structure -= damage // 2
         system -= damage // 2
+    if system < 0:
+        system = 0
     ship["structure"] = structure
     ship[target] = system
     
@@ -35,7 +37,9 @@ def take_damage(ship, damage, target):
 
 def fire(firing_ship, defending_ship, target):
     damage = randint(0, firing_ship["weapons"])
+    print(damage)
     defending_ship = take_damage(defending_ship, damage, target)
+    print(defending_ship)
     return defending_ship
 
 def your_turn(gamestate, ship, enemy):
@@ -66,14 +70,10 @@ def combat(gamestate, enemy):
     ship = gamestate["ships"]["my ship"]
     fighting = True
     turn = 1
-    print(enemy)
+    print("enemy:",enemy)
     while fighting:
         gamestate, ship, enemy, fighting, turn = do_turn(gamestate, ship, enemy, turn)
         turn = turn % 2 + 1 #switch player
-        print(ship)
-        print(enemy)
+        print("me:",ship)
+        print("enemy:",enemy)
     gamestate["ships"]["my ship"] = ship
-
-gamestate = initilize()
-combat(gamestate,"fighter")
-print("\nover")
