@@ -1,3 +1,5 @@
+from random import randint
+
 def initilize():
     #navigation between systems
     galaxy = {  "sol" : ["eta helion", "agromega", "pi abbidon"]
@@ -39,7 +41,15 @@ def initilize():
                             , "engines" : 120, "weapons" : 20
                             , "sensors" : 100}
               }
+    #location of enemys
+    ship_locs = {}
+    ship_types = [ "fighter", "corvette" ]
+    for system in systems:
+        for planet in systems[system]:
+            ship_locs[planet] = ship_types[randint( 0, len(ship_types) - 1 )]
+    
     gamestate = { "galaxy" : galaxy , "systems" : systems, "ships" : ships
-                  , "location" : [ "sol", "" ]
+                  , "ship_locs" : ship_locs ,"location" : [ "sol", "" ]
             }
     return gamestate
+
