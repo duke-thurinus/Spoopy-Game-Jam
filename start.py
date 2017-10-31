@@ -21,7 +21,7 @@ def initilize():
                 , "agromega" : [ "the asteroid belt", "agromega 1" ]
                 , "pi abbidon" : [ "pi abbidon 1", "pi abbidon 2", "pi abbidon3"
                                    , "pi abbidon 4", "pi abbidon 5" ]
-                , "devolin" : [False]
+                , "devolin" : [None]
                 , "euridian" : [ "euridian 1", "euridian 2", "euridian 3"
                                  , "euridian 4", "euridian 4", "euridian 5"
                                  , "euridian 6", "euridian 7" ]

@@ -1,18 +1,17 @@
 import commands, start
-from text import input_clean
+from user import clean_input
 
 def print_loc(gamestate):
     loc = gamestate["location"][1]
     
     if loc == "":
-        print("\nYour are in the", gamestate["location"][0].title(), "system.")
+        print("\nYou are in the", gamestate["location"][0].title(), "system.")
     else:
         print("\nYou are near the planet", loc.title(), "in the system"
               , gamestate["location"][0].title() + ".")
 
 def get_command(gamestate):
-    command = input("What are going to do captain? ")
-    command = input_clean(command)
+    command = clean_input("What are going to do captain? ")
 
     if command == "quit":
         return "q"
