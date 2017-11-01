@@ -1,7 +1,7 @@
-import ship_combat
+from ship_combat import combat
 
-def is_ships(planet, gamestate):
+def encounter_check(planet, gamestate):
     if gamestate["ship_locs"][planet]:
-        combat(gamestate, gamestate[""][planet])
+        return combat(gamestate, gamestate["ship_locs"][planet])
     else:
         return False

@@ -65,8 +65,8 @@ def do_turn(gamestate, ship, enemy, turn):
         return gamestate, ship, enemy, not is_dead(ship), turn
 
 #tracks turns
-def combat(gamestate, enemy):
-    enemy = gamestate["ships"][enemy]
+def combat(gamestate, enemy_ship_name):
+    enemy = gamestate["ships"][enemy_ship_name]
     ship = gamestate["ships"]["my ship"]
     fighting = True
     turn = 1
@@ -77,3 +77,4 @@ def combat(gamestate, enemy):
         print("me:",ship)
         print("enemy:",enemy)
     gamestate["ships"]["my ship"] = ship
+    return gamestate

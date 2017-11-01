@@ -1,4 +1,5 @@
-import commands, start
+import commands, start, game_data
+from ship_combat import combat
 from user import clean_input
 
 def print_loc(gamestate):
@@ -18,7 +19,11 @@ def get_command(gamestate):
     elif command == "warp":
         return commands.warpdrive(gamestate)
     elif command == "impulse":
-        return commands.impulse(gamestate)
+        gamestate = commands.impulse(gamestate)
+        encounter = game_data.encounter_check(gamestate["location"][1], gamestate)
+        if encounter:
+            gamestate = encounter
+        return gamestate
     else:
         return False
 
