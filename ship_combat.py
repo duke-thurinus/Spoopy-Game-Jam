@@ -45,7 +45,7 @@ def fire(firing_ship, defending_ship, target):
 def your_turn(gamestate, ship, enemy):
     command = input("What are going to do captain? ")
     if command == "fire":
-        target = user.get_from_list(["engines", "weapons", "sensors"])
+        target = user.get_from_list(["engines", "weapons", "sensors"], None, False)
         enemy = fire(ship, enemy, target)
         return gamestate, ship, enemy, not is_dead(enemy)
     elif command == "warp":
