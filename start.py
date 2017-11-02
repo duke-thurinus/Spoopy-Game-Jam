@@ -42,7 +42,7 @@ def initilize():
                             , "sensors" : 100}
               }
     #location of enemys
-    ship_locs = {}
+    ship_locs = dict()
     ship_types = [ "fighter", "corvette" ]
     for system in systems:
         for planet in systems[system]:
