@@ -21,6 +21,8 @@ def take_damage(ship, damage, target):
         if shields < 0:
             damage = shields * -1
             shields = 0
+        else:
+            damage = 0
     ship["shields"] = shields
 
     structure = ship["structure"]
